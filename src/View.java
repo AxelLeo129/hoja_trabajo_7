@@ -1,5 +1,6 @@
 package src;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class View {
@@ -7,35 +8,31 @@ public class View {
     public View() {}
 
     public void execute() {
-        /*Lector lector = new Lector();
-        System.out.println(lector.readFile("assets/diccionario.txt"));*/
-        Arbol tree = new Arbol();
-        HashMap<String, String> i = new HashMap<>();
-        i.put("ingles", "house");
-        i.put("español", "casa");
-        i.put("frances", "loger");
-        HashMap<String, String> j = new HashMap<>();
-        j.put("ingles", "dog");
-        j.put("español", "perro");
-        j.put("frances", "chien");
-        HashMap<String, String> k = new HashMap<>();
-        k.put("ingles", "homework");
-        k.put("español", "tarea");
-        k.put("frances", "devoirs");
-        tree.addNodo("house", i);
-        tree.addNodo("dog", j);
-        tree.addNodo("homework", k);
-        tree.inOrder(tree.raiz);
-        System.out.println(tree.searchNodo("dog").toString());
+        Lector lector = new Lector();
+        ArrayList<String> lineas = new ArrayList<>();
+        lineas = lector.readFile("assets/diccionario.txt");
+        Arbol ingles = fillTree(lineas, 0);
+        Arbol espaniol = fillTree(lineas, 1);
+        Arbol frances = fillTree(lineas, 2);
+        
+        
+        /*frances.inOrder(frances.raiz);
+        System.out.println(frances.searchNodo("perro").toString());*/
 
-        /*
-        house,casa,loger
-        dog,perro,chien
-        homework,tarea,devoirs
-        woman,mujer,femme
-        town,pueblo,ville
-        yes,si,Oui
-        */
+        
+    }
+
+    public Arbol fillTree(ArrayList<String> lineas, int numero_lenguaje) {
+        Arbol lenguaje = new Arbol();
+        lineas.forEach((n) -> {
+            HashMap<String, String> valores = new HashMap<>();
+            String[] e = n.split(",");
+            valores.put("i", e[0]);
+            valores.put("e", e[1]);
+            valores.put("f", e[1]);
+            lenguaje.addNodo(e[numero_lenguaje], valores);
+        });
+        return lenguaje;
     }
 
 }

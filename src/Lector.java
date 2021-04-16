@@ -1,6 +1,7 @@
 package src;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class Lector {
 
@@ -12,11 +13,11 @@ public class Lector {
     /**
      * @return devuelve la linea escrita en el txt 
      */
-    public String readFile(String file_path) {
+    public ArrayList<String> readFile(String file_path) {
         File archivo = null;
         FileReader fr = null;
         BufferedReader br = null;
-        String salida = "";
+        ArrayList<String> salida = new ArrayList<>();
 
         try {
             
@@ -25,8 +26,8 @@ public class Lector {
             br = new BufferedReader(fr);
 
             String linea;
-            while ((linea = br.readLine()) != null)
-                System.out.println(linea);
+            while ((linea = br.readLine()) != null) 
+                salida.add(linea);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
